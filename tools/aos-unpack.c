@@ -47,6 +47,7 @@ static struct option options[] =
 	{ "a5",		no_argument,		&device, MPK_DEVICE_A5 },
 	{ "a5it",		no_argument,		&device, MPK_DEVICE_A5IT },
 	{ "a3g",		no_argument,		&device, MPK_DEVICE_A3GP },
+	{ "g9a",		no_argument,		&device, MPK_DEVICE_G9A },
 	
 	/* Generic options */
 	{ "verbose",	no_argument,		0, 'v' },
@@ -149,6 +150,7 @@ int parse_flash_partition(uint8_t *data, unsigned int length, const char *partit
 			case MPK_DEVICE_A5: device_shortname = "a5"; break;
 			case MPK_DEVICE_A5IT: device_shortname = "a5it"; break;
 			case MPK_DEVICE_A3GP: device_shortname = "a3g"; break;
+			case MPK_DEVICE_G9A: device_shortname = "g9a"; break;
 			default: device_shortname = "unk"; break;
 		}
 		
@@ -625,13 +627,13 @@ int parse_aos_header(struct aos_file *file, int *detected_device)
 				the device type can be detected from the UNIT block. */
 			
 			fprintf(stderr, "%s: Could not detect device type because the file is not signed.\n"
-							"\tSpecify --a5, --a5it or --a3g.\n", program);
+							"\tSpecify --a5, --a5it, --a3g or --g9a.\n", program);
 			return 0;
 		}
 		
 		if(!aos_detect_key(file, keys, MPK_KNOWN_DEVICES, detected_device)) {
 			fprintf(stderr, "%s: Could not detect device type from signature data.\n"
-							"Specify --a5, --a5it or --a3g.", program);
+							"\tSpecify --a5, --a5it, --a3g or --g9a.\n", program);
 			return 0;
 		}
 		
@@ -778,13 +780,13 @@ int parse_flash_header(struct flash_file *file, int *detected_device)
 	else {
 		if(!flash_is_signed(file)) {
 			fprintf(stderr, "%s: Could not detect device type because the file is not signed.\n"
-							"\tSpecify --a5, --a5it or --a3g.\n", program);
+							"\tSpecify --a5, --a5it, --a3g or --g9a.\n", program);
 			return 0;
 		}
 		
 		if(!flash_detect_key(file, Bootloader_Keys, MPK_KNOWN_DEVICES, detected_device)) {
 			fprintf(stderr, "%s: Could not detect device type from signature data.\n"
-							"Specify --a5, --a5it or --a3g.", program);
+							"\tSpecify --a5, --a5it, --a3g or --g9a.\n", program);
 			return 0;
 		}
 		
@@ -913,6 +915,7 @@ int main(int argc, char *argv[])
 		printf("  --zimage, -i [file]\tUse this filename for zImage. Meaningful only with a kernel flash segment.\n");
 		printf("  --initramfs, -r [file] Use this filename for initramfs. Meaningful only with a kernel flash segment.\n");
 		printf("\n");
+		printf("  --g9a\t\t\tAssume the target .aos is for the Archos G9 devices\n");
 		printf("  --a5\t\t\tAssume the target .aos is for the Archos 5/7 devices\n");
 		printf("  --a5it\t\tAssume the target .aos is for the Archos 5 Internet Tablet with Android\n");
 		printf("  --a3g\t\t\tAssume the target .aos is for the Archos 3G+ from SFR\n");

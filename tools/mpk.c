@@ -49,6 +49,7 @@ unsigned char **mpk_possible_aes_keys()
 const char *mpk_device_type(int device)
 {
 	switch(device) {
+	case MPK_DEVICE_G9A:	return "Archos G9";
 	case MPK_DEVICE_A5:	return "Archos 5";
 	case MPK_DEVICE_A5IT:	return "Archos 5 Internet Tablet with Android";
 	case MPK_DEVICE_A3GP:	return "Archos 3G+ from SFR";
