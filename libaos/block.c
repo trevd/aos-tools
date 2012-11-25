@@ -60,7 +60,6 @@ struct aos_block *block_get(struct aos_file *file, int num)
 		return NULL;
 	
 	for(i=0;i<num;i++) {
-		//fprintf(stderr,"block_get:%d\n",num);
 		block = block_next(file, block);
 		if(!block)
 			return NULL;

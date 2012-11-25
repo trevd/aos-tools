@@ -1,7 +1,7 @@
 /*
  * Written by EiNSTeiN_
  * 		http://archos.g3nius.org/
- *
+ * 
  * Released under the GNU General Public License v2
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
@@ -31,10 +31,13 @@ static struct option options[] =
 	{ "all",		no_argument,		0, 'a' },
 	
 	/* Which device keys to use? */
-	{ "g9a",		no_argument,		&device, MPK_DEVICE_G9A },
 	{ "a5",		no_argument,		&device, MPK_DEVICE_A5 },
 	{ "a5it",		no_argument,		&device, MPK_DEVICE_A5IT },
 	{ "a3g",		no_argument,		&device, MPK_DEVICE_A3GP },
+	{ "g8a",		no_argument,		&device, MPK_DEVICE_G8A },
+	{ "g8v2",		no_argument,		&device, MPK_DEVICE_G8AV2 },
+	{ "g9a",		no_argument,		&device, MPK_DEVICE_G9A },
+	{ "g10a",		no_argument,		&device, MPK_DEVICE_G10A },
 	
 	/* Generic options */
 	{ "verbose",	no_argument,		0, 'v' },
@@ -141,13 +144,13 @@ int parse_header(struct aos_file *file, int *detected_device)
 				the device type can be detected from the UNIT block. */
 			
 			fprintf(stderr, "%s: Could not detect device type because the file is not signed.\n"
-							"\tSpecify --a5, --a5it, --a3g or --g9a.\n", program);
+							"\tSpecify --a5, --a5it or --a3g.\n", program);
 			return 0;
 		}
 		
 		if(!aos_detect_key(file, keys, MPK_KNOWN_DEVICES, detected_device)) {
 			fprintf(stderr, "%s: Could not detect device type from signature data.\n"
-							"\tSpecify --a5, --a5it, --a3g or --g9a.\n", program);
+							"Specify --a5, --a5it or --a3g.", program);
 			return 0;
 		}
 		
@@ -382,10 +385,13 @@ int main(int argc, char *argv[])
 		printf("  --list\t\tDisplays a list of all blocks, for .aos containers only.\n");
 		printf("  --all, -a\t\tDisplay all available information (all options above).\n");
 		printf("\n");
-		printf("  --g9a\t\t\tAssume the target .aos is for the Archos G9 devices\n");
 		printf("  --a5\t\t\tAssume the target .aos is for the Archos 5/7 devices\n");
 		printf("  --a5it\t\tAssume the target .aos is for the Archos 5 Internet Tablet with Android\n");
 		printf("  --a3g\t\t\tAssume the target .aos is for the Archos 3G+ from SFR\n");
+		printf("  --g8a\t\t\tAssume the target .aos is for the Archos Gen8 Internet Tablet Series\n");
+		printf("  --g8av2\t\t\tAssume the target .aos is for the Archos Gen8 V2 Internet Tablet (A70ITV2)\n");
+		printf("  --g9a\t\t\tAssume the target .aos is for the Archos Gen9 Internet Tablet Series\n");
+		printf("  --g10a\t\t\tAssume the target .aos is for the Archos Gen10 Internet Tablet Series\n");
 		printf("    In most cases, this can be auto-detected.\n");
 		printf("\n");
 		printf("  --help, -h\t\tDisplay this text\n");

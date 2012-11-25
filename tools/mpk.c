@@ -1,7 +1,7 @@
 /*
  * Written by EiNSTeiN_
  * 		http://archos.g3nius.org/
- *
+ * Enhanced by scholbert
  * Released under the GNU General Public License v2
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
@@ -49,10 +49,13 @@ unsigned char **mpk_possible_aes_keys()
 const char *mpk_device_type(int device)
 {
 	switch(device) {
-	case MPK_DEVICE_G9A:	return "Archos G9";
 	case MPK_DEVICE_A5:	return "Archos 5";
 	case MPK_DEVICE_A5IT:	return "Archos 5 Internet Tablet with Android";
 	case MPK_DEVICE_A3GP:	return "Archos 3G+ from SFR";
+	case MPK_DEVICE_G8A:	return "Archos Gen8";
+	case MPK_DEVICE_G8AV2:	return "Archos Gen8 V2";
+	case MPK_DEVICE_G9A:	return "Archos Gen9";
+	case MPK_DEVICE_G10A:	return "Archos Gen10";
 	}
 	
 	return "Unknown";

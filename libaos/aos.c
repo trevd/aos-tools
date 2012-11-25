@@ -32,7 +32,7 @@ struct aos_file *aos_create(uint8_t *data, unsigned int length)
 
 int aos_verify_magic(struct aos_file *file)
 {
-	//fprintf(stderr,"aos_verify_magic\n");
+	
 	return (*(uint32_t *)file->data == AOS_MAGIC);
 }
 
@@ -52,20 +52,18 @@ int aos_detect_key(struct aos_file *file, uint8_t **keys, unsigned int n, int *d
 
 int aos_verify_signature(struct aos_file *file, const uint8_t *mpk_key)
 {
-	
 	struct aos_signature sign;
 	struct aos_block *block;
 	unsigned int length;
 	const uint8_t *data;
 	
 	block = block_get(file, AOS_SIGN_BLOCK_ID);
-	if(block == NULL){
+	if(block == NULL)
 		return 0;
-	}
-	if(block->length != sizeof(struct aos_block)+AOS_SIGNATURE_LENGTH){
+	
+	if(block->length != sizeof(struct aos_block)+AOS_SIGNATURE_LENGTH)
 		return 0;
-	}
- 	//fprintf(stderr,"aos_verify_signature: block length:%d type:%x \n",block->length , block->type);
+	
 	aos_signature_init(&sign);
 	aos_signature_set_data(&sign, block->data);
 	aos_signature_set_key(&sign, mpk_key);
