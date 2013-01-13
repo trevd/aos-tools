@@ -5,4 +5,4 @@ tools/aos-info
 tools/aos-repack
 tools/aos-unpack
 tools/firmware_archos_it4
-
+*.o
