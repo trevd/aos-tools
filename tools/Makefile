@@ -22,10 +22,10 @@ aos-repack: $(AOS_REPACK_OBJECTS)
 	gcc -o aos-repack $(AOS_REPACK_OBJECTS) -L../libaos -laos -lcrypto
 
 install:
-	cp aos-info /usr/bin/
-	cp aos-unpack /usr/bin/
-	cp aos-fix /usr/bin/
-	cp aos-repack /usr/bin/
+	cp aos-info /usr/local/bin/
+	cp aos-unpack /usr/local/bin/
+	cp aos-fix /usr/local/bin/
+	cp aos-repack /usr/local/bin/
 
 clean:
 	rm -f aos-info aos-unpack aos-fix aos-repack *.o
